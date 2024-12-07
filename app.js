@@ -150,30 +150,55 @@
 
 
 
+// const express = require("express");
+// const app = express();
+
+// app.get("/user", (req, res, next) => {
+//     console.log("1st route response !!");
+//     // res.send("hui");
+//     next();
+// }, (req, res,next) => {
+//     console.log("2nd route response !!");
+//     // res.send("hahah");
+//     next();
+// }, (req,res,next)=>{
+//     console.log("3rd route response !!");
+//     next();
+// }, (req,res,next)=>{
+//     console.log("4th route response !!");
+//     // res.send("hhhhhhhhhhhh");
+//     next();
+// });
+
+// //" if we use one more or next but don't have any route error "
+
+// app.listen(3000, () => {
+//     console.log("Server is running port 3000...");
+// });
+
+
+
+
+
+ 
+
 const express = require("express");
 const app = express();
+// Handle Auth Middleware for all GET, POST,...request
+const {adminAuth, UserAuth} = require("./middlewares/auth.js");
+app.use("/admin", adminAuth);
 
-app.get("/user", (req, res, next) => {
-    console.log("1st route response !!");
-    // res.send("hui");
-    next();
-}, (req, res,next) => {
-    console.log("2nd route response !!");
-    // res.send("hahah");
-    next();
-}, (req,res,next)=>{
-    console.log("3rd route response !!");
-    next();
-}, (req,res,next)=>{
-    console.log("4th route response !!");
-    // res.send("hhhhhhhhhhhh");
-    next();
+app.post("/user/login", (req,res)=>{
+    res.send("Uset logged in succesfully");
 });
+ 
+app.get("/admin/getAllData", (req,res)=> {
+        res.send("All Data Sent");
+   });
+   app.get("/admin/deleteuser", (req,res)=>{
+    res.send("Deleted a user");
+   });
 
-//" if we use one more or next but don't have any route error "
-
-app.listen(3000, () => {
-    console.log("Server is running port 3000...");
+app.listen(7777,()=>{
+    console.log("Server is successfully listening on port 7777...");
 });
-
-
