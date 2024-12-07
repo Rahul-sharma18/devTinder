@@ -182,23 +182,51 @@
 
  
 
+// const express = require("express");
+// const app = express();
+// // Handle Auth Middleware for all GET, POST,...request
+// const {adminAuth, UserAuth} = require("./middlewares/auth.js");
+// app.use("/admin", adminAuth);
+
+// app.post("/user/login", (req,res)=>{
+//     res.send("Uset logged in succesfully");
+// });
+ 
+// app.get("/admin/getAllData", (req,res)=> {
+//         res.send("All Data Sent");
+//    });
+//    app.get("/admin/deleteuser", (req,res)=>{
+//     res.send("Deleted a user");
+//    });
+
+// app.listen(7777,()=>{
+//     console.log("Server is successfully listening on port 7777...");
+// });
+
+
+
+
+
+
 const express = require("express");
 const app = express();
-// Handle Auth Middleware for all GET, POST,...request
-const {adminAuth, UserAuth} = require("./middlewares/auth.js");
-app.use("/admin", adminAuth);
 
-app.post("/user/login", (req,res)=>{
-    res.send("Uset logged in succesfully");
+app.get("/getUserData", (req, res)=>{
+    try {
+    // Logic of DB call and get user data
+    throw new Error("dvbzhjf");
+    res.send("User Data Sent");
+    } catch (err){
+        res.status(500).send("Some Error contact support team");
+    }
+});
+
+app.use("/", (err, req, res, next)=>{   // use this code every application bcz have any error then handle it.
+    if(err){
+        res.status(501).send("something went wrong");
+    }
 });
  
-app.get("/admin/getAllData", (req,res)=> {
-        res.send("All Data Sent");
-   });
-   app.get("/admin/deleteuser", (req,res)=>{
-    res.send("Deleted a user");
-   });
-
-app.listen(7777,()=>{
+app.listen(7777, ()=>{
     console.log("Server is successfully listening on port 7777...");
 });
